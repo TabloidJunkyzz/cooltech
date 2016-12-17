@@ -1,14 +1,6 @@
 // "Cooltech.cpp" Implementation for our header "Cooltech.h"
 
 #include "Cooltech.h"
-#include <fstream>
-#include <functional>
-#include <iostream>
-#include <string>
-#include <math.h>
-//#define NDEBUG
-#include <cassert>
-#define M_PI   3.14159265358979323846
 using namespace std;
 
 
@@ -22,6 +14,8 @@ double gelesen;
 ofstream out;
 double temp;
 
+//String for Versions
+string version = "";
 
 //Variables for functions of pipe measurements and main
 double lambda;
@@ -34,8 +28,13 @@ double newtonHelp;
 //Struct variables
 data pipe, water, pump, cost, result;
 
-//Declaration of our "read"-function
+// ############################################# Read and Consoles ###########################################
 
+#if 0
+By Lukas Samuel Jeck
+#endif // 0
+
+//Declaration of our "read"-function that saves data from charts in arrays
 void read()//Reads in Data from charts
 {
 
@@ -122,7 +121,7 @@ file.close();
 	// Setup for Reading Costparameters
 file.open("Kosten.txt");
 
-	//Reads DIN´s for naming available pipes [First line of "Kosten.txt"]; Skips end of line
+	//Reads DINs for naming available pipes [First line of "Kosten.txt"]; Skips end of line
 	for(int i=0; i<NCOST; i++)
 	{
 		file >> gelesen;
@@ -141,7 +140,6 @@ file.open("Kosten.txt");
 	}
 
 	file >> skip;
-	cout <<endl;
 
 	//Reads Wall Thickness of available pipes [Third line of "Kosten.txt"]; Skips end of line
 	for(int i=0; i<NCOST; i++)
@@ -178,34 +176,34 @@ file.close();
 
 
 
-
+//Declaration of our "printRead"-function that prints out aved arrays of "read"-function in console
 void printRead()//Gives read data in Console
 {
 
-//User Information
-cout << "Gruppe 1.5 Numerik Praktikum [Lukas Samuel Jeck]" << "          --- Einlesen der Daten aus Tabelle 1 - 4 ---"
-	 << endl << endl << "Beachte: Teilweise in untersch. Einheiten eingelesen! [Angegebene Einheiten]" << endl;
+//General Informations
+cout << "Gruppe 1.5 Numerik Praktikum" << "          --- Konsolenausgaben nach Entwicklerversion ---"
+	 << endl << endl << "~~~ Einleseroutine:" << "Beachte! Teilweise in untersch. Einheiten eingelesen! [Einheiten sind angegeben] ~~~" << endl;
 
 cout << endl << "                  --- Rohrdaten ---" << endl<<endl;
 
 	//Gives flow of each pipe in Console
 	for(int i=0;i<NPIPE;i++)
 	{
-		cout << "Durchstrom Rohr " << i+1 << ": " << pipe.flow[i] << " [m³/s]"<<endl;
+		cout << "Durchstrom Rohr " << i+1 << ": " << setw(7) << left << pipe.flow[i] << " [m^3/s]"<<endl;
 	}
 cout<<endl;
 
 	//Gives Deltap of each pipe in Console
 	for(int i=0;i<NPIPE;i++)
 	{
-		cout << "Delta p Rohr " << i+1 << ": " << pipe.deltaP[i] << " [Pa]" << endl;
+		cout << "Delta p Rohr " << i+1 << ": " << setw(6) << left << pipe.deltaP[i] << " [Pa]" << endl;
 	}
 cout<<endl;
 
 	//Gives length of each pipe in Console
 	for(int i=0;i<NPIPE;i++)
 	{
-		cout << "Laenge Rohr " << i+1 << ": " << pipe.length[i] << " [m]" << endl;
+		cout << "Laenge Rohr " << i+1 << ": " << setw(5) << left << pipe.length[i] << " [m]" << endl;
 	}
 cout << endl;
 
@@ -225,7 +223,7 @@ cout<<"                  --- Pumpendaten ---"<<endl<<endl;
 	//Gives powerMech of each Pump in Console
 	for(int i=0;i<NPUMP;i++)
 	{
-		cout << "Mech. Pumpenleistung von Pumpe " << i+1 << ": " << pump.powerMech[i] << " [W]" << endl;
+		cout << "Mech. Pumpenleistung von Pumpe " << i+1 << ": " << setw(8) << left << pump.powerMech[i] << " [W]" << endl;
 
 	}
 cout<<endl;
@@ -233,7 +231,7 @@ cout<<endl;
 	//Gives Pumpefficiency of each Pump in Console
 	for(int i=0;i<NPUMP;i++)
 	{
-	cout << "Pumpenwirkungsgrad von Pumpe " << i+1 << ": " << 100*pump.efficiency[i]
+		cout << "Pumpenwirkungsgrad von Pumpe " << i+1 << ": " << 100*pump.efficiency[i]
 					<< " [%] (Mit Faktor 1/100 eingelesen)" << endl;
 	}
 cout <<endl;
@@ -244,31 +242,32 @@ cout << "                  --- Kostenparameter ---" << endl << endl;
 	//Gives insideDiameter of each available pipe in Console
 	for(int i=0; i<NCOST; i++)
 	{
-		cout << "Innendurchmesser des lieferbaren Rohrs mit DIN " << cost.dIN[i]
-			 << ": " << cost.insideDiameter[i]<< " [m]" <<endl;
+		cout << "Innendurchmesser des lieferbaren Rohrs mit DIN " << setw(3) << right << cost.dIN[i]
+			 << ": " << setw(6) << left << cost.insideDiameter[i]<< " [m]" <<endl;
 	}
 	cout<<endl;
 
 	//Gives wallThickness of each available pipe in Console
 	for(int i=0; i<NCOST; i++)
 	{
-		cout << "Wandstaerke des lieferbaren Rohrs mit DIN " << cost.dIN[i] << ": " << cost.wallThickness[i]
-						 << " [m]" <<endl;
+		cout << "Wandstaerke des lieferbaren Rohrs mit DIN " << setw(3) << right << cost.dIN[i] << ": " << setw(8) << left
+             << cost.wallThickness[i] << " [m]" <<endl;
+
 	}
 	cout<<endl;
 
 	//Gives calculated outsideDiameter of each available pipe in Console
 	for(int i=0; i<NCOST; i++)
 	{
-		cout << "Aussendurchmesser des lieferbaren Rohrs mit DIN " << cost.dIN[i] << ": "
-							 << cost.outsideDiameter[i] << " [m]" << endl;
+		cout << "Aussendurchmesser des lieferbaren Rohrs mit DIN " << setw(3) << right << cost.dIN[i] << ": "
+							 << setw(8) << left << cost.outsideDiameter[i] << " [m]" << endl;
 	}
 	cout<<endl;
 
 	//Gives calculated PowerPEL of each Pump in Console
 	for(int i=0; i<NPUMP; i++)
 	{
-		cout << "Pumpenleistung Pel von Pumpe " << i+1 << ": " << pump.powerEL[i] << " [kW]" << endl;
+		cout << "Pumpenleistung Pel von Pumpe " << i+1 << ": " << setw(8) << left << pump.powerEL[i] << " [kW]" << endl;
 	}
 	cout<<endl;
 
@@ -276,40 +275,37 @@ cout << "                  --- Kostenparameter ---" << endl << endl;
 cout << "Betriebszeit: " << cost.operationTime << " [h]" << endl << endl;
 }//END OF VOID printread
 
-#if 0
-+Hier muss Lukas die Arrays noch in die KONSOLE ausgeben lassen
-        +Evtl ausklammern
-        +Auf Formatierung aufpassen [Auch Einheiten nicht vergessen!]
-#endif // 0
 
 
+//Declaration of our "printResults"-function that prints calculated data in Console
 void printResults()
 {
 
 //Console Prints: It's mentioned in the cout's what is printed below
-cout<<endl<<endl << "		~~~ Konsolenausgabe der Arrays die in Funktionen berechnet werden ~~~"<<endl<<endl;
+cout <<endl<< "		~~~ Konsolenausgabe der Arrays die in Funktionen berechnet werden ~~~"<<endl<<endl;
+
 cout << "--- PressureLossFriction ---"<<endl<<endl;
+
 	for(int i=0; i<NPUMP;i++)
 	{
 		for(int j=0; j<NPIPE;j++)
 		{
-			cout << result.pressureLossFriction[i][j] << "[Pa]" << "\t"; //i:Zeilen j:Spalten
+			cout << setw(12) << left << result.pressureLossFriction[i][j] << "[Pa]" << "    "; //i:Zeilen j:Spalten
 		}
-		cout<<endl;
+        cout<<endl<<endl;
 	}
-cout << endl;
 
-cout << "Lambda von Nikuradse: " << lambdaStart <<endl;
-cout<<endl;
+
+cout << "############# Lambda von Nikuradse " << lambdaStart << " #############" <<endl<<endl;
 
 cout << "--- Calculated Diameter ---"<<endl<<endl;
 	for(int i=0; i<NPUMP;i++)
 		{
 			for(int j=0; j<NPIPE;j++)
 			{
-				cout << result.diameter[i][j] << "[m]" << "\t"; //i:Zeilen j:Spalten
+				cout << setw(12) << left << result.diameter[i][j] << "[m]" << "    "; //i:Zeilen j:Spalten
 			}
-			cout<<endl;
+			cout<<endl<<endl;
 		}
 cout<<endl;
 
@@ -319,9 +315,9 @@ cout << "--- Reynolds ---"<<endl<<endl;
 		{
 			for(int j=0; j<NPIPE;j++)
 			{
-				cout << result.reynolds[i][j] << "[Einheitslos]" << "\t"; //i:Zeilen j:Spalten
+				cout << setw(15) << left << result.reynolds[i][j] << "    "; //i:Zeilen j:Spalten
 			}
-			cout<<endl;
+			cout<<endl<<endl;
 		}
 cout<<endl;
 
@@ -331,9 +327,9 @@ cout << "--- Ideal (inside)Diameters from Charts ---"<<endl<<endl;
 		{
 			for(int j=0; j<NPIPE;j++)
 			{
-				cout << result.insideDiameterChart[i][j] << "[m]" << "\t"; //i:Zeilen j:Spalten
+				cout << setw(12) << left << result.insideDiameterChart[i][j] << "[m]" << "    "; //i:Zeilen j:Spalten
 			}
-			cout<<endl;
+			cout<<endl<<endl;
 		}
 cout<<endl;
 
@@ -343,9 +339,9 @@ cout << "--- Ideal (outside)Diameters from Charts ---"<<endl<<endl;
 		{
 			for(int j=0; j<NPIPE;j++)
 			{
-				cout << result.outsideDiameterChart[i][j] << "[m]" << "\t"; //i:Zeilen j:Spalten
+				cout << setw(12) << left << result.outsideDiameterChart[i][j] << "[m]" << "    "; //i:Zeilen j:Spalten
 			}
-			cout<<endl;
+			cout<<endl<<endl;
 		}
 cout<<endl;
 
@@ -355,9 +351,9 @@ cout << "--- Pressure Loss Valve ---"<<endl<<endl;
 		{
 			for(int j=0; j<NPIPE;j++)
 			{
-				cout << result.pressureLossValve[i][j] << "[Pa]" << "\t"; //i:Zeilen j:Spalten
+				cout << setw(12) << left << result.pressureLossValve[i][j] << "[Pa]" << "    "; //i:Zeilen j:Spalten
 			}
-			cout<<endl;
+			cout<<endl<<endl;
 		}
 cout<<endl;
 
@@ -365,18 +361,26 @@ cout<<endl;
 
 
 
-
+//Declaration of our "userInformation"-fucntion that prints a text for the user in the Console
 void userInformation()
 {
 
-	//COUT WITH INFORMATION WHERE DATA IS SAVED AND STUFF
+    cout <<endl<<endl;
+	cout << "Vielen dank dass sie die Dienste von Cooltech Technologies in Anspruch nehmen!"<<endl<<endl;
+	cout << "Die Daten aus den Tabellen werden eingelesen und verarbeitet ..."<<endl<<endl;
+	cout << "Bitte Ã¶ffnen sie Cooltech_Daten.txt um die Ergebnisse der Berechnungen einzusehen."<<endl<<endl;
 
-}
-//Functions with which calculations are done
+}//END OF VOID userInformation
 
+#if0
+By Lukas Samuel Jeck
+#endif
 
+// ##################################################### Calculations for Pipedimensioning ################################
 
-
+#if 0
+By Hermann Hegel & Boda Yang [Lukas Samuel Jeck as a Helping Hand]
+#endif // 0
 double pressureLossFrictionFunction (int i,int j)//Calculates pressureLossFriction 1DIM [Initialisation of an array in main]
 {
 
@@ -403,7 +407,7 @@ double diameterFunction (int i,int j)//Calculates Diameter 1DIM [Initialisation 
 
 	return pow(((8.0*lambda*pipe.length[j]*water.density*pipe.flow[j]*pipe.flow[j])/(M_PI*M_PI*result.pressureLossFriction[i][j])),0.2);
 
-}//END OF double** diameterFunction
+}//END OF double diameterFunction
 
 
 
@@ -433,13 +437,14 @@ double colebrookDerivativeFunction (int i, int j, std::function<double(int, int,
 {
        return (func(i, j, lambda+EPSILON) - func(i ,j ,lambda-EPSILON))/(2*EPSILON);
 
-}
+}//END OF colebrookDerivativeFunction
 
 
 
 
 double newtonFunction (int i, int j, double lambda, std::function<double(int,int,double)>func)
 {
+
     do{
         newtonHelp  = lambda;
         newton      = lambda - (func(i, j, lambda)/colebrookDerivativeFunction(i, j, colebrookFunction));
@@ -448,7 +453,8 @@ double newtonFunction (int i, int j, double lambda, std::function<double(int,int
     } while (fabs(newton - newtonHelp) > EPSILON);
 
     return lambda;
-}
+
+}//END OF double newtonFunction
 
 
 
@@ -472,112 +478,130 @@ void pickDiameterFromChart () //insideDiameter from chart out of read data, idea
             result.outsideDiameterChart[i][j] = cost.insideDiameter[m]+2*cost.wallThickness[m]; //save the chart outside Diameters
         }
     }
-}//END OF double pickDiameterFromChart
+}//END OF VOID pickDiameterFromChart
+#if 0
+By Hermann Hegel & Boda Yang [Lukas Samuel Jeck as a Helping Hand]
+#endif // 0
 
 
 
 
+#if 0
+By Lina Lepp
+#endif // 0
 double pressureLossValveFunction(int i,int j)
 {
 
 	return (pump.powerMech[i]/pipe.flow[j]) - pipe.deltaP[j] - ((8*lambda*pipe.length[j]*water.density*pipe.flow[j]*pipe.flow[j]) / (M_PI*M_PI*pow(result.insideDiameterChart[i][j],5.0)));
 
 }//END OF double pressureLossValveFunction
-
 #if 0
-+Hier muss Lukas sich die Formatierung noch anschauen [Einheiten nicht vergessen!]
+By Lina Lepp
 #endif // 0
 
 
-
+#if 0
+By Lukas Samuel Jeck
+#endif // 0
+//Declaration of our "output"-function that takes calculated data and writes it in Cooltech_Daten.txt
 void output(){
 
-//Setting up output(Creating file operator)
+	//Setting up output(Creating file operator)
 out.open("Cooltech_Daten.txt");
 
-//Information (Headline of "Cooltech_Daten.txt")
-	out << "Gruppe 1.5 Numerik Praktikum [Lukas Samuel Jeck]" << "            --- Ausgeben der Dateien in eine Textdatei ---";
+	//Information (Headline of "Cooltech_Daten.txt")
+	out << "Gruppe 1.5 Numerik Praktikum" << "            --- Ausgeben der Dateien in eine Textdatei ---";
 	out << endl<<endl<<endl;
 
-//Defining what data is shown
-out << "~~~ Daten der Rohrauslegung ~~~"<<endl<<endl<<endl;
+	//Defining what data is shown
+	out << "~~~ Daten der Rohrauslegung ~~~"<<endl<<endl<<endl;
 
 
-//Putting out ideal Diameters of pipes for each Pipe
-out << "--- Durchmesser[Pumpe][Rohr] ---"<<endl<<endl;
-for(int i=0;i<NPUMP;i++)
-{
-
-	for(int j=0;j<NPIPE;j++)
+	//Putting out ideal Diameters of pipes for each Pipe
+	out << "--- Durchmesser[Pumpe][Rohr] ---"<<endl<<endl;
+	for(int i=0;i<NPUMP;i++)
 	{
-      out << "Durchmesser[" << i+1 << "]" << "[" << j+1 << "] " << result.insideDiameterChart[i][j] << "\t";
+
+		for(int j=0;j<NPIPE;j++)
+		{
+      			out << "Durchmesser[" << i+1 << "]" << "[" << j+1 << "] " << setw(6) << left << result.insideDiameterChart[i][j] << "    ";
+		}
+			out<<endl;
 	}
 	out<<endl;
-}
-out<<endl;
 
 
-//Putting out Pressureloss of Valve
-out << "--- Druckverlust für Ausgleichsventil[Pumpe][Rohr] ---"<<endl<<endl;
-for(int i=0;i<NPUMP;i++)
-{
-
-	for(int j=0;j<NPIPE;j++)
+	//Putting out Pressureloss of Valve
+	out << "--- Druckverlust fÃ¼r Ausgleichsventil[Pumpe][Rohr] ---"<<endl<<endl;
+	for(int i=0;i<NPUMP;i++)
 	{
-      out << "Ventildruck[" << i+1 << "]" << "[" << j+1 << "] " << result.pressureLossValve[i][j] << "\t";
+
+		for(int j=0;j<NPIPE;j++)
+		{
+	      		out << "Ventildruck[" << i+1 << "]" << "[" << j+1 << "] " << result.pressureLossValve[i][j] << "    ";
+		}
+		out<<endl;
 	}
-	out<<endl;
-}
-out<<endl<<endl;
+	out<<endl<<endl;
 
 
-//Defining what Data is shown
-out << "~~~ Daten zur Kostenberechnung ~~~"<<endl<<endl<<endl;
+	//Data that is getting put out is shown above
+	out << "~~~ Daten zur Kostenberechnung ~~~"<<endl<<endl<<endl;
 
 
-//Putting out the Total Cost of each Pump
-out << "--- Kosten Pumpen[Pumpe] ---"<<endl<<endl;
-for(int i=0;i<NPUMP;i++)
-{
-	out << "Kosten Pumpe[" << i+1 << "] " << result.pumpCost[i]<< "\t";
-}
-out<<endl;
 
-
-out << "--- Kosten Rohre[Rohre] ---"<<endl<<endl;
-for(int j=0;j<NPIPE;j++)
-{
-	out << "Kosten Rohr[" << j+1 << "] " << result.pipeCost[j]<< "\t";
-}
-out<<endl;
-
-
-out << "--- Kosten Strom[Pumpe] ---"<<endl<<endl;
-for(int i=0;i<NPUMP;i++)
-{
-	out << "Kosten Strom[" << i+1 << "] " << result.pumpCost[i]<< "\t";
-}
-out<<endl;
-
-
-out << "--- Gesamtkosten[Pumpe][Rohr] ---"<<endl<<endl;
-for(int i=0;i<NPUMP;i++)
-{
-
-	for(int j=0;j<NPIPE;j++)
+	out << "--- Kosten Pumpen[Pumpe] ---"<<endl<<endl;
+	for(int i=0;i<NPUMP;i++)
 	{
-      out << "Gesamtkosten[" << i+1 << "]" << "[" << j+1 << "] " << result.totalCost[i][j] << "\t";
+		out << "Kosten Pumpe[" << i+1 << "] " << result.pumpCost[i]<<endl;
 	}
+	out<<endl<<endl;
+
+
+	out << "--- Kosten Rohre[Pumpe][Rohr] ---"<<endl<<endl;
+	for(int i=0;i<NPUMP;i++)
+	{
+
+		for(int j=0;j<NPIPE;j++)
+		{
+      			out << "Rohrkosten[" << i+1 << "]" << "[" << j+1 << "] " << result.pipeCost[i][j] <<"    ";
+		}
 	out<<endl;
-}
-out<<endl<<endl;
+	}
+	out<<endl<<endl;
+
+
+	out << "--- Kosten Strom[Pumpe] ---"<<endl<<endl;
+	for(int i=0;i<NPUMP;i++)
+	{
+		out << "Kosten Strom[" << i+1 << "] " << result.pumpCost[i]<<endl;
+	}
+	out<<endl<<endl;
+
+
+	out << "--- Gesamtkosten[Pumpe][Rohr] ---"<<endl<<endl;
+	for(int i=0;i<NPUMP;i++)
+	{
+
+		for(int j=0;j<NPIPE;j++)
+		{
+      			out << "Gesamtkosten[" << i+1 << "]" << "[" << j+1 << "] " << setw(6) << left << result.totalCost[i][j] <<"\t";
+		}
+	out<<endl;
+	}
+	out<<endl<<endl;
 
 out.close();
 } //END of Void output
 
-/*------------------------------------------------------- END OF PUMPCALCULATION -----------------------------------------------------------*/
 #if 0
-Hier muss Lukas noch Arrays für 1DIM Arrays in main belegen
+By Lukas Samuel Jeck
+#endif // 0
+
+//##################################################### Cost Calculations ##########################################
+
+#if 0
+By Frederik
 #endif // 0
 
 double pumpCostFunction(int i)					//powerEl in kW
@@ -616,16 +640,20 @@ double totalCostFunction(int i,int j)
 	return pumpCostFunction(i) + pipeCostFunction(i,j) + powerCostFunction(i);
 
 }
+#if 0
+By Frederik
+#endif // 0
 
-
-
-
-/*--------------------------------------------------------- POLYNOMIAL FIT -----------------------------------------------------------------*/
-
+#if 0
+By Jakob
+#endif // 0
+//########################################################### Polynomial Fit ##########################################
 
 double* polynomialFit(int degree, int NPUMP, double* x, double* y)	//add cin>> degree for user
 														//degree is the degree of the polynom, x[] and y[] the valuepairs
 {
+
+
     int i, j, k;										//counting Variables
     double a[degree + 1];								//Array that stores the coefficents of the polynom
     double X[2 * degree + 1];							//Array that will store the values of sigma(xi),sigma(xi^2),sigma(xi^3)....sigma(xi^2n)
@@ -700,3 +728,7 @@ double* polynomialFit(int degree, int NPUMP, double* x, double* y)	//add cin>> d
     }
     return a;
 }
+
+#if 0
+By Jakob
+#endif // 0
