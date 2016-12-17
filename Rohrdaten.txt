@@ -1,0 +1,7 @@
+110   60   30   68    75    88        Durchfluss
+
+0.25  0.2  0.1  0.15  0.21  0.3       DELTApVerbraucher
+
+60    25   40   35    20    30        Laenge
+
+0.4                                   Rohrrauigkeit
