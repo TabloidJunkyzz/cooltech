@@ -7,11 +7,11 @@ Our task is to write a program that computes optimal values for a fictious pump-
 
 ---
 
-###The students are:
-*Lukas
-*Hermann
-*Lina
-*Boda
-*Jakob
-*Frederik
+#####The students are:
+	*Lukas
+	*Hermann
+	*Lina
+	*Boda
+	*Jakob
+	*Frederik
 
