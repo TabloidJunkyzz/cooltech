@@ -13,11 +13,6 @@ int main(){
 cout << "############# Wollen sie die Entwicklerversion starten?? #############"<<endl<< "Ja[j], Nein[n]" <<endl;
 getline(cin,version);
 
-if(version == "n")
-    {
-        userInformation();
-    }
-
 //Puts Data in System
 read();
 //Prints Data in console
@@ -27,10 +22,12 @@ if(version == "j")
         printRead();
     }
 
+//for loop for saving pumpCost
 for(int i=0;i<NPUMP;i++)
     {
       result.pumpCost[i] = pumpCostFunction(i);
     }
+
 	//Here happens most of the stuff: 1.) Calculating our needed datas  2.) Saving those in arrays with [NPUMP][NPIPE]
 	for (int i=0;i<NPUMP;i++)
 	{
@@ -52,9 +49,15 @@ for(int i=0;i<NPUMP;i++)
 			result.pressureLossValve[i][j] = pressureLossValveFunction(i,j);
 			result.pipeCost[j]             = pipeCostFunction(i,j);
 			result.totalCost[i][j]         = totalCostFunction(i,j);
+			checkForMistake(i,j);
 
 		}
 	}
+
+	if(version == "n")
+    {
+        userInformation();
+    }
 
 	pickDiameterFromChart(); //Saved in "result.insideDiameterChart[i][j]" & "result.outsideDiameterChart[i][j]"
 

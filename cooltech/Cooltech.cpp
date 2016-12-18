@@ -25,6 +25,9 @@ double lambdaTemp;
 double newton;
 double newtonHelp;
 
+//Bool Variable mistake
+bool mistake;
+
 //Struct variables
 data pipe, water, pump, cost, result;
 
@@ -370,6 +373,11 @@ void userInformation()
 	cout << "Die Daten aus den Tabellen werden eingelesen und verarbeitet ..."<<endl<<endl;
 	cout << "Bitte öffnen sie Cooltech_Daten.txt um die Ergebnisse der Berechnungen einzusehen."<<endl<<endl;
 
+	if(mistake == true)
+        {
+            cout << "DIE SCH*$!* VERKACKTE PUMPE 1 GEHT NICHT :( !"<<endl<<endl;
+        }
+
 }//END OF VOID userInformation
 
 #if 0
@@ -384,7 +392,7 @@ By Hermann Hegel & Boda Yang [Lukas Samuel Jeck as a Helping Hand]
 double pressureLossFrictionFunction (int i,int j)//Calculates pressureLossFriction 1DIM [Initialisation of an array in main]
 {
 
-	return (pump.powerMech[i]/pipe.flow[j])-pipe.deltaP[j];
+	return (pump.powerMech[i]/TOTALFLOW)-pipe.deltaP[j];
 
 }//END OF double pressureLossFrictionFunction
 
@@ -492,7 +500,7 @@ By Lina Lepp
 double pressureLossValveFunction(int i,int j)
 {
 
-	return (pump.powerMech[i]/pipe.flow[j]) - pipe.deltaP[j] - ((8*lambda*pipe.length[j]*water.density*pipe.flow[j]*pipe.flow[j]) / (M_PI*M_PI*pow(result.insideDiameterChart[i][j],5.0)));
+	return (pump.powerMech[i]/TOTALFLOW) - pipe.deltaP[j] - ((8*lambda*pipe.length[j]*water.density*pipe.flow[j]*pipe.flow[j]) / (M_PI*M_PI*pow(result.insideDiameterChart[i][j],5.0)));
 
 }//END OF double pressureLossValveFunction
 #if 0
@@ -504,10 +512,16 @@ By Lina Lepp
 By Lukas Samuel Jeck
 #endif // 0
 //Declaration of our "output"-function that takes calculated data and writes it in Cooltech_Daten.txt
-void output(){
+void output()
+{
 
 	//Setting up output(Creating file operator)
 out.open("Cooltech_Daten.txt");
+
+if(mistake == true)
+    {
+     out << "DIE SCH*!$* VERKACKTE PUMPE 1 GEHT NICHT :( !"<<endl<<endl;
+    }
 
 	//Information (Headline of "Cooltech_Daten.txt")
 	out << "Gruppe 1.5 Numerik Praktikum" << "            --- Ausgeben der Dateien in eine Textdatei ---";
@@ -589,6 +603,17 @@ out.open("Cooltech_Daten.txt");
 
 out.close();
 } //END of Void output
+
+
+
+
+void checkForMistake(int i,int j)
+{
+    if(result.pressureLossFriction[i][j]<0)
+        {
+            mistake = true;
+        }
+} //END OF VOID checkForMistake
 
 #if 0
 By Lukas Samuel Jeck
