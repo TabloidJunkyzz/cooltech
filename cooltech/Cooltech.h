@@ -55,9 +55,9 @@ struct data{
 	double outsideDiameterChart[NPUMP][NPIPE];
 	double pressureLossValve[NPUMP][NPIPE];
 	double pumpCost[NPUMP];
-	double pipeCost[NPIPE];
-	double powerCost[NCOST];
-	double totalCost[NPUMP][NPIPE];
+	double pipeCost[NPUMP][NPIPE];
+	double powerCost[NPUMP];
+	double totalCost[NPUMP];
 
 
 };
@@ -81,6 +81,13 @@ extern double lambdaTemp;
 //Newton Variables
 extern double newton;
 extern double newtonHelp;
+
+//temporarily stores Pipe costs for each Pump
+extern double pipeCostStorage;
+
+//declarations for polynomfit
+extern int degree;
+extern double* coefficents;
 
 //Struct Data declarations!
 extern data pipe;
@@ -126,7 +133,8 @@ void userInformation();
 double pipeCostFunction(int i,int j);
 double pumpCostFunction(int i);
 double powerCostFunction(int i);
-double totalCostFunction(int i,int j);
+double totalCostFunction(int i);
 
+void polynomialFit();
 
 #endif //Header Guard END

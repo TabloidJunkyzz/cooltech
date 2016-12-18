@@ -67,4 +67,13 @@ if (version == "j")
 }
 	output();
 
+
+	cout << "Please enter degree of the polynom (has to be smaller than the amount of pumps): " << endl;
+	cin >> degree;
+	assert(degree < NPUMP);
+
+
+    polynomialFit();
+
+
 } //INT MAIN END
