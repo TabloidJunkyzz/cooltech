@@ -503,7 +503,7 @@ By Lina Lepp
 double pressureLossValveFunction(int i,int j)
 {
 
-	return (pump.powerMech[i]/TOTALFLOW) - pipe.deltaP[j] - ((8*lambda*pipe.length[j]*water.density*pipe.flow[j]*pipe.flow[j]) / (M_PI*M_PI*pow(result.insideDiameterChart[i][j],5.0)));
+	return (8*lambda*pipe.length[j]*water.density*pipe.flow[j]*pipe.flow[j]) / (M_PI*M_PI*pow(result.diameter[i][j],5.0)) - ((8*lambda*pipe.length[j]*water.density*pipe.flow[j]*pipe.flow[j]) / (M_PI*M_PI*pow(result.insideDiameterChart[i][j],5.0)));
 
 }//END OF double pressureLossValveFunction
 #if 0
