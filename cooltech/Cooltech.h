@@ -89,6 +89,10 @@ extern double pipeCostStorage;
 extern int degree;
 extern double* coefficents;
 
+//Minimum Calculation Variables
+extern double xMin;                 //x-value of our global minimum | both xmin and minCost compose the coordinates of our global minimum
+extern double minCost;
+
 //Struct Data declarations!
 extern data pipe;
 extern data water;
@@ -134,7 +138,9 @@ double pipeCostFunction(int i,int j);
 double pumpCostFunction(int i);
 double powerCostFunction(int i);
 double totalCostFunction(int i);
+void minCostFunction();
 
+//Polynomfit
 void polynomialFit();
 
 #endif //Header Guard END
