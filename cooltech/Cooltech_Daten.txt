@@ -1,34 +1,32 @@
-DIE SCH*!$* VERKACKTE PUMPE 1 GEHT NICHT :( !
-
 Gruppe 1.5 Numerik Praktikum            --- Ausgeben der Dateien in eine Textdatei ---
 
 
 ~~~ Daten der Rohrauslegung ~~~
 
 
---- Innendurchmesser Bestellung[Pumpe][Rohr] ---
+--- Durchmesser[Pumpe][Rohr] ---
 
-Innendurchmesser[1][1] 0.0688    Innendurchmesser[1][2] 0.2494    Innendurchmesser[1][3] 0.1478    Innendurchmesser[1][4] 0.2494    Innendurchmesser[1][5] 0.2494    Innendurchmesser[1][6] 0.0688
-Innendurchmesser[2][1] 0.3004    Innendurchmesser[2][2] 0.2018    Innendurchmesser[2][3] 0.1478    Innendurchmesser[2][4] 0.2018    Innendurchmesser[2][5] 0.2018    Innendurchmesser[2][6] 0.2494
-Innendurchmesser[3][1] 0.2494    Innendurchmesser[3][2] 0.2018    Innendurchmesser[3][3] 0.123     Innendurchmesser[3][4] 0.2018    Innendurchmesser[3][5] 0.2018    Innendurchmesser[3][6] 0.2018
-Innendurchmesser[4][1] 0.2494    Innendurchmesser[4][2] 0.1478    Innendurchmesser[4][3] 0.123     Innendurchmesser[4][4] 0.2018    Innendurchmesser[4][5] 0.1478    Innendurchmesser[4][6] 0.2018
-Innendurchmesser[5][1] 0.2018    Innendurchmesser[5][2] 0.1478    Innendurchmesser[5][3] 0.123     Innendurchmesser[5][4] 0.1478    Innendurchmesser[5][5] 0.1478    Innendurchmesser[5][6] 0.2018
-Innendurchmesser[6][1] 0.2018    Innendurchmesser[6][2] 0.1478    Innendurchmesser[6][3] 0.123     Innendurchmesser[6][4] 0.1478    Innendurchmesser[6][5] 0.1478    Innendurchmesser[6][6] 0.2018
-Innendurchmesser[7][1] 0.2018    Innendurchmesser[7][2] 0.123     Innendurchmesser[7][3] 0.123     Innendurchmesser[7][4] 0.1478    Innendurchmesser[7][5] 0.1478    Innendurchmesser[7][6] 0.2018
-Innendurchmesser[8][1] 0.2018    Innendurchmesser[8][2] 0.123     Innendurchmesser[8][3] 0.099     Innendurchmesser[8][4] 0.1478    Innendurchmesser[8][5] 0.1478    Innendurchmesser[8][6] 0.1478
-Innendurchmesser[9][1] 0.2018    Innendurchmesser[9][2] 0.123     Innendurchmesser[9][3] 0.099     Innendurchmesser[9][4] 0.1478    Innendurchmesser[9][5] 0.123     Innendurchmesser[9][6] 0.1478
+Durchmesser[1][1] 0.0688    Durchmesser[1][2] 0.2494    Durchmesser[1][3] 0.1478    Durchmesser[1][4] 0.2494    Durchmesser[1][5] 0.2494    Durchmesser[1][6] 0.0688    
+Durchmesser[2][1] 0.3004    Durchmesser[2][2] 0.2018    Durchmesser[2][3] 0.1478    Durchmesser[2][4] 0.2018    Durchmesser[2][5] 0.2018    Durchmesser[2][6] 0.2494    
+Durchmesser[3][1] 0.2494    Durchmesser[3][2] 0.2018    Durchmesser[3][3] 0.123     Durchmesser[3][4] 0.2018    Durchmesser[3][5] 0.2018    Durchmesser[3][6] 0.2018    
+Durchmesser[4][1] 0.2494    Durchmesser[4][2] 0.1478    Durchmesser[4][3] 0.123     Durchmesser[4][4] 0.2018    Durchmesser[4][5] 0.1478    Durchmesser[4][6] 0.2018    
+Durchmesser[5][1] 0.2018    Durchmesser[5][2] 0.1478    Durchmesser[5][3] 0.123     Durchmesser[5][4] 0.1478    Durchmesser[5][5] 0.1478    Durchmesser[5][6] 0.2018    
+Durchmesser[6][1] 0.2018    Durchmesser[6][2] 0.1478    Durchmesser[6][3] 0.123     Durchmesser[6][4] 0.1478    Durchmesser[6][5] 0.1478    Durchmesser[6][6] 0.2018    
+Durchmesser[7][1] 0.2018    Durchmesser[7][2] 0.123     Durchmesser[7][3] 0.123     Durchmesser[7][4] 0.1478    Durchmesser[7][5] 0.1478    Durchmesser[7][6] 0.2018    
+Durchmesser[8][1] 0.2018    Durchmesser[8][2] 0.123     Durchmesser[8][3] 0.099     Durchmesser[8][4] 0.1478    Durchmesser[8][5] 0.1478    Durchmesser[8][6] 0.1478    
+Durchmesser[9][1] 0.2018    Durchmesser[9][2] 0.123     Durchmesser[9][3] 0.099     Durchmesser[9][4] 0.1478    Durchmesser[9][5] 0.123     Durchmesser[9][6] 0.1478    
 
 --- Druckverlust für Ausgleichsventil[Pumpe][Rohr] ---
 
-Ventildruck[1][1] -nan    Ventildruck[1][2] -inf    Ventildruck[1][3] -inf    Ventildruck[1][4] -inf    Ventildruck[1][5] -inf    Ventildruck[1][6] -nan
-Ventildruck[2][1] -inf    Ventildruck[2][2] -inf    Ventildruck[2][3] -inf    Ventildruck[2][4] -inf    Ventildruck[2][5] -inf    Ventildruck[2][6] -inf
-Ventildruck[3][1] -inf    Ventildruck[3][2] -inf    Ventildruck[3][3] -inf    Ventildruck[3][4] -inf    Ventildruck[3][5] -inf    Ventildruck[3][6] -inf
-Ventildruck[4][1] -inf    Ventildruck[4][2] -inf    Ventildruck[4][3] -inf    Ventildruck[4][4] -inf    Ventildruck[4][5] -inf    Ventildruck[4][6] -inf
-Ventildruck[5][1] -inf    Ventildruck[5][2] -inf    Ventildruck[5][3] -inf    Ventildruck[5][4] -inf    Ventildruck[5][5] -inf    Ventildruck[5][6] -inf
-Ventildruck[6][1] -inf    Ventildruck[6][2] -inf    Ventildruck[6][3] -inf    Ventildruck[6][4] -inf    Ventildruck[6][5] -inf    Ventildruck[6][6] -inf
-Ventildruck[7][1] -inf    Ventildruck[7][2] -inf    Ventildruck[7][3] -inf    Ventildruck[7][4] -inf    Ventildruck[7][5] -inf    Ventildruck[7][6] -inf
-Ventildruck[8][1] -inf    Ventildruck[8][2] -inf    Ventildruck[8][3] -inf    Ventildruck[8][4] -inf    Ventildruck[8][5] -inf    Ventildruck[8][6] -inf
-Ventildruck[9][1] -inf    Ventildruck[9][2] -inf    Ventildruck[9][3] -inf    Ventildruck[9][4] -inf    Ventildruck[9][5] -inf    Ventildruck[9][6] -inf
+Ventildruck[1][1] nan    Ventildruck[1][2] -inf    Ventildruck[1][3] -inf    Ventildruck[1][4] -inf    Ventildruck[1][5] -inf    Ventildruck[1][6] nan    
+Ventildruck[2][1] -inf    Ventildruck[2][2] -inf    Ventildruck[2][3] -inf    Ventildruck[2][4] -inf    Ventildruck[2][5] -inf    Ventildruck[2][6] -inf    
+Ventildruck[3][1] -inf    Ventildruck[3][2] -inf    Ventildruck[3][3] -inf    Ventildruck[3][4] -inf    Ventildruck[3][5] -inf    Ventildruck[3][6] -inf    
+Ventildruck[4][1] -inf    Ventildruck[4][2] -inf    Ventildruck[4][3] -inf    Ventildruck[4][4] -inf    Ventildruck[4][5] -inf    Ventildruck[4][6] -inf    
+Ventildruck[5][1] -inf    Ventildruck[5][2] -inf    Ventildruck[5][3] -inf    Ventildruck[5][4] -inf    Ventildruck[5][5] -inf    Ventildruck[5][6] -inf    
+Ventildruck[6][1] -inf    Ventildruck[6][2] -inf    Ventildruck[6][3] -inf    Ventildruck[6][4] -inf    Ventildruck[6][5] -inf    Ventildruck[6][6] -inf    
+Ventildruck[7][1] -inf    Ventildruck[7][2] -inf    Ventildruck[7][3] -inf    Ventildruck[7][4] -inf    Ventildruck[7][5] -inf    Ventildruck[7][6] -inf    
+Ventildruck[8][1] -inf    Ventildruck[8][2] -inf    Ventildruck[8][3] -inf    Ventildruck[8][4] -inf    Ventildruck[8][5] -inf    Ventildruck[8][6] -inf    
+Ventildruck[9][1] -inf    Ventildruck[9][2] -inf    Ventildruck[9][3] -inf    Ventildruck[9][4] -inf    Ventildruck[9][5] -inf    Ventildruck[9][6] -inf    
 
 
 ~~~ Daten zur Kostenberechnung ~~~
@@ -49,7 +47,16 @@ Kosten Pumpe[9] 37613
 
 --- Kosten Rohre[Pumpe][Rohr] ---
 
-Rohrkosten[1] 9060    Rohrkosten[2] 3775    Rohrkosten[3] 6040    Rohrkosten[4] 5285    Rohrkosten[5] 3020    Rohrkosten[6] 4530
+Rohrkosten[1][1] 9060    Rohrkosten[1][2] 3775    Rohrkosten[1][3] 6040    Rohrkosten[1][4] 5285    Rohrkosten[1][5] 3020    Rohrkosten[1][6] 4530    
+Rohrkosten[2][1] 9060    Rohrkosten[2][2] 3775    Rohrkosten[2][3] 6040    Rohrkosten[2][4] 5285    Rohrkosten[2][5] 3020    Rohrkosten[2][6] 4530    
+Rohrkosten[3][1] 9060    Rohrkosten[3][2] 3775    Rohrkosten[3][3] 6040    Rohrkosten[3][4] 5285    Rohrkosten[3][5] 3020    Rohrkosten[3][6] 4530    
+Rohrkosten[4][1] 9060    Rohrkosten[4][2] 3775    Rohrkosten[4][3] 6040    Rohrkosten[4][4] 5285    Rohrkosten[4][5] 3020    Rohrkosten[4][6] 4530    
+Rohrkosten[5][1] 9060    Rohrkosten[5][2] 3775    Rohrkosten[5][3] 6040    Rohrkosten[5][4] 5285    Rohrkosten[5][5] 3020    Rohrkosten[5][6] 4530    
+Rohrkosten[6][1] 9060    Rohrkosten[6][2] 3775    Rohrkosten[6][3] 6040    Rohrkosten[6][4] 5285    Rohrkosten[6][5] 3020    Rohrkosten[6][6] 4530    
+Rohrkosten[7][1] 9060    Rohrkosten[7][2] 3775    Rohrkosten[7][3] 6040    Rohrkosten[7][4] 5285    Rohrkosten[7][5] 3020    Rohrkosten[7][6] 4530    
+Rohrkosten[8][1] 9060    Rohrkosten[8][2] 3775    Rohrkosten[8][3] 6040    Rohrkosten[8][4] 5285    Rohrkosten[8][5] 3020    Rohrkosten[8][6] 4530    
+Rohrkosten[9][1] 9060    Rohrkosten[9][2] 3775    Rohrkosten[9][3] 6040    Rohrkosten[9][4] 5285    Rohrkosten[9][5] 3020    Rohrkosten[9][6] 4530    
+
 
 --- Kosten Strom[Pumpe] ---
 
@@ -64,9 +71,16 @@ Kosten Strom[8] 35476.1
 Kosten Strom[9] 37613
 
 
---- Gesamtkosten[Pumpe][Rohr] ---
+--- Gesamtkosten[Pumpe] ---
 
-Gesamtkosten[1][1] 32759 	Gesamtkosten[1][2] 27474 	Gesamtkosten[1][3] 29739 	Gesamtkosten[1][4] 28984 	Gesamtkosten[1][5] 26719 	Gesamtkosten[1][6] 28229
-
+Gesamtkosten[1]55409 	
+Gesamtkosten[2]57662.3	
+Gesamtkosten[3]59588.4	
+Gesamtkosten[4]61248.7	
+Gesamtkosten[5]62690.1	
+Gesamtkosten[6]63949 	
+Gesamtkosten[7]65054.3	
+Gesamtkosten[8]67191.1	
+Gesamtkosten[9]69328 	
 
 
