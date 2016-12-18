@@ -68,19 +68,26 @@ for(int i=0;i<NPUMP;i++)
     }
 
 
-    if (version == "j")
-    {
-        printResults();
-    }
-	output();
-
-
 	cout << "Please enter degree of the polynom (has to be smaller than the amount of pumps): " << endl;
 	cin >> degree;
 	assert(degree < NPUMP);
 
 
     polynomialFit();
+    minCostFunction();
 
+
+    for(int k=0;k<degree+1;k++)
+        {
+            cout << coefficents[k] << "    ";
+        }
+
+    if (version == "j")
+    {
+        printResults();
+    }
+
+    output();
+    delete [] coefficents;
 
 } //INT MAIN END

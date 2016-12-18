@@ -28,8 +28,15 @@ double newtonHelp;
 //Bool Variable mistake
 bool mistake;
 
+//Polynomfit
 double pipeCostStorage;
+double* coefficents;
 int degree;
+
+
+//Minimum Variables
+double xMin;
+double minCost;
 
 //Struct variables
 data pipe, water, pump, cost, result;
@@ -363,6 +370,10 @@ cout << "--- Pressure Loss Valve ---"<<endl<<endl;
 		}
 cout<<endl;
 
+cout << "--- Minimalberechnung ---"<<endl<<endl;
+
+cout << "Minimalkosten: " << minCost << "Abhaengig von Pumpenleistung: " << xMin << "[kW]"<<endl<<endl;
+
 }//END OF VOID printResults
 
 
@@ -621,7 +632,7 @@ By Lukas Samuel Jeck
 //##################################################### Cost Calculations ##########################################
 
 #if 0
-By Frederik
+By Jakob Mangold
 #endif // 0
 
 double pumpCostFunction(int i)					//powerEl in kW
@@ -664,20 +675,20 @@ double totalCostFunction(int i)
 	return pumpCostFunction(i) + pipeCostStorage + powerCostFunction(i);
 
 }
-#if 0
-By Frederik
-#endif // 0
 
-#if 0
-By Jakob
-#endif // 0
+
 //########################################################### Polynomial Fit ##########################################
+
 
 void polynomialFit()	                    //add cin>> degree for user														//degree is the degree of the polynom, x[] and y[] the valuepairs
 {                                                       // ATTENTION: ADD ASSERT FOR DEGREE > NPUMP ---> ABORT
 
     int i, k, l, m;										//counting Variables
-    double* coefficents = new double[degree+1];								//Array that stores the coefficents of the polynom
+    coefficents = new double[degree+1];	                //Array that stores the coefficents of the polynom
+    for (k = 0; k < degree; k++)
+    {
+        coefficents[k] = 0;
+    }
     double powerElArray[2 * degree + 1];							//Array that will store the values of sigma(xi),sigma(xi^2),sigma(xi^3)....sigma(xi^2n)
     for (k = 0 ; k < 2 * degree + 1 ; k++)
     {
@@ -751,5 +762,49 @@ void polynomialFit()	                    //add cin>> degree for user												
 }
 
 #if 0
-By Jakob
+By Jakob Mangold
+#endif // 0
+
+#if 0
+By Frederik Heberle
+#endif // 0
+ //########################################     Minimum of Polynom      #########################################################
+
+
+void  minCostFunction()
+{
+	double tempMinCost = 0.0;
+    minCost = 1e10;                                    //setting initial minCost value high to ensure that it will be replaced later
+	double firstGuess;										//first value to start numerical evaluation later taken from powerEL
+
+	double xValues[NPUMP];                                  //creating a new array to sort
+	for(int i = 0; i < NPUMP; i++) {                        //copying all necessary elements of powerEL to new array
+        xValues[i] = pump.powerEL[i];
+	}
+
+	for (int c = 0; c < NPUMP; c++) {                       //perform insertion sort to make sure all values in xValues are sorted in ascending order
+        int d = c;                                          //d and c are counting variables only used in this loop
+        while(d > 0 && xValues[d] < xValues[d-1]) {
+            double temp = xValues[d];
+            xValues[d] = xValues[d-1];
+            xValues[d-1] = temp;
+            d--;
+        }
+	}
+
+	for(int j = xValues[0]; j < xValues[NPUMP-1]; j++) {        //starting brute-force search for minimum at lowest value on power-scale of our pumps !!NOTIZ WENN xVALUES double dann muss j double!!
+		firstGuess = j;                            			//firstGuess as variable to represent x in our polynomial
+
+		for(int i = 0; i < degree; i++) {			//using Horner's scheme to compute result of polynomial
+			tempMinCost += pow(firstGuess, i) * coefficents[i];      //getting tempMinCost as temp-variable for our computed y-value of the polynomial
+		}
+
+		if(minCost >= tempMinCost && tempMinCost > 0) {                        //comparing our newly computed y-value to the last given y-value
+			minCost = tempMinCost;                          //if newer y-value is lower (cheaper) than one before, overwrite old value with new one
+			xMin = firstGuess;                              //save corresponding x-value to new y-value for output
+		}
+	}
+}
+#if 0
+By Frederik Heberle
 #endif // 0
