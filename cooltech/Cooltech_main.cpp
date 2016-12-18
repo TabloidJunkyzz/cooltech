@@ -4,33 +4,25 @@
 using namespace std;
 
 
-#if 0
-+Kostenfunktion aufrufen fehlt noch
-#endif
-
 int main(){
 
 cout << "############# Wollen sie die Entwicklerversion starten?? #############"<<endl<< "Ja[j], Nein[n]" <<endl;
 getline(cin,version);
 
-if(version == "n")
-{
-    userInformation();
-}
-	//Puts Data in System
-	read();
-	//Prints Data in console
+//Puts Data in System
+read();
+//Prints Data in console
 
 if(version == "j")
-{
-	printRead();
-}
-	//Here we have a for-loop to save data in arrays with [NPUMP]
-	for(int i=0;i<NPUMP;i++)
-	{
-		result.pumpCost[i] = pumpCostFunction(i);
-	}
+    {
+        printRead();
+    }
 
+//for loop for saving pumpCost
+for(int i=0;i<NPUMP;i++)
+    {
+      result.pumpCost[i] = pumpCostFunction(i);
+    }
 
 	//Here happens most of the stuff: 1.) Calculating our needed datas  2.) Saving those in arrays with [NPUMP][NPIPE]
 	for (int i=0;i<NPUMP;i++)
@@ -49,20 +41,53 @@ if(version == "j")
 					lambda = newtonFunction(i,j, lambda, colebrookFunction) ;//Functioncalling of newton
 
 				} while (fabs(lambdaTemp - lambda) > 0.0001);
-
-			result.pressureLossValve[i][j] = pressureLossValveFunction(i,j);
-			result.pipeCost[i][j] 		   = pipeCostFunction(i,j);
-			result.totalCost[i][j]         = totalCostFunction(i,j);
+                checkForMistake(i, j);
 
 		}
+
 	}
 
 	pickDiameterFromChart(); //Saved in "result.insideDiameterChart[i][j]" & "result.outsideDiameterChart[i][j]"
 
-if (version == "j")
-{
-	printResults();
-}
-	output();
+
+
+    for (int i=0;i<NPUMP;i++)
+	{
+	    result.totalCost[i]            = totalCostFunction(i);
+
+		for(int j=0;j<NPIPE;j++)
+		{
+            result.pipeCost[i][j] 		   = pipeCostFunction(i,j);
+            result.pressureLossValve[i][j] = pressureLossValveFunction(i,j);
+		}
+	}
+
+	if(version == "n")
+    {
+        userInformation();
+    }
+
+
+	cout << "Please enter degree of the polynom (has to be smaller than the amount of pumps): " << endl;
+	cin >> degree;
+	assert(degree < NPUMP);
+
+
+    polynomialFit();
+    minCostFunction();
+
+
+    for(int k=0;k<degree+1;k++)
+        {
+            cout << coefficents[k] << "    ";
+        }
+
+    if (version == "j")
+    {
+        printResults();
+    }
+
+    output();
+    delete [] coefficents;
 
 } //INT MAIN END
