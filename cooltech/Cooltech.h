@@ -55,7 +55,7 @@ struct data{
 	double outsideDiameterChart[NPUMP][NPIPE];
 	double pressureLossValve[NPUMP][NPIPE];
 	double pumpCost[NPUMP];
-	double pipeCost[NPUMP][NPIPE];
+	double pipeCost[NPIPE];
 	double powerCost[NCOST];
 	double totalCost[NPUMP][NPIPE];
 

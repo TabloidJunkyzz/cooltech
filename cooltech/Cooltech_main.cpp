@@ -14,24 +14,23 @@ cout << "############# Wollen sie die Entwicklerversion starten?? #############"
 getline(cin,version);
 
 if(version == "n")
-{
-    userInformation();
-}
-	//Puts Data in System
-	read();
-	//Prints Data in console
+    {
+        userInformation();
+    }
+
+//Puts Data in System
+read();
+//Prints Data in console
 
 if(version == "j")
-{
-	printRead();
-}
-	//Here we have a for-loop to save data in arrays with [NPUMP]
-	for(int i=0;i<NPUMP;i++)
-	{
-		result.pumpCost[i] = pumpCostFunction(i);
-	}
+    {
+        printRead();
+    }
 
-
+for(int i=0;i<NPUMP;i++)
+    {
+      result.pumpCost[i] = pumpCostFunction(i);
+    }
 	//Here happens most of the stuff: 1.) Calculating our needed datas  2.) Saving those in arrays with [NPUMP][NPIPE]
 	for (int i=0;i<NPUMP;i++)
 	{
@@ -51,7 +50,7 @@ if(version == "j")
 				} while (fabs(lambdaTemp - lambda) > 0.0001);
 
 			result.pressureLossValve[i][j] = pressureLossValveFunction(i,j);
-			result.pipeCost[i][j] 		   = pipeCostFunction(i,j);
+			result.pipeCost[j]             = pipeCostFunction(i,j);
 			result.totalCost[i][j]         = totalCostFunction(i,j);
 
 		}

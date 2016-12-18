@@ -296,7 +296,7 @@ cout << "--- PressureLossFriction ---"<<endl<<endl;
 	}
 
 
-cout << "############# Lambda von Nikuradse " << lambdaStart << " #############" <<endl<<endl;
+cout << "############# Lambda von Nikuradse: " << lambdaStart << " #############" <<endl<<endl;
 
 cout << "--- Calculated Diameter ---"<<endl<<endl;
 	for(int i=0; i<NPUMP;i++)
@@ -372,7 +372,7 @@ void userInformation()
 
 }//END OF VOID userInformation
 
-#if0
+#if 0
 By Lukas Samuel Jeck
 #endif
 
@@ -518,13 +518,13 @@ out.open("Cooltech_Daten.txt");
 
 
 	//Putting out ideal Diameters of pipes for each Pipe
-	out << "--- Durchmesser[Pumpe][Rohr] ---"<<endl<<endl;
+	out << "--- Innendurchmesser Bestellung[Pumpe][Rohr] ---"<<endl<<endl;
 	for(int i=0;i<NPUMP;i++)
 	{
 
 		for(int j=0;j<NPIPE;j++)
 		{
-      			out << "Durchmesser[" << i+1 << "]" << "[" << j+1 << "] " << setw(6) << left << result.insideDiameterChart[i][j] << "    ";
+      			out << "Innendurchmesser[" << i+1 << "]" << "[" << j+1 << "] " << setw(6) << left << result.insideDiameterChart[i][j] << "    ";
 		}
 			out<<endl;
 	}
@@ -559,15 +559,11 @@ out.open("Cooltech_Daten.txt");
 
 
 	out << "--- Kosten Rohre[Pumpe][Rohr] ---"<<endl<<endl;
-	for(int i=0;i<NPUMP;i++)
-	{
 
 		for(int j=0;j<NPIPE;j++)
 		{
-      			out << "Rohrkosten[" << i+1 << "]" << "[" << j+1 << "] " << result.pipeCost[i][j] <<"    ";
+      			out << "Rohrkosten[" << j+1 << "] " << result.pipeCost[j] <<"    ";
 		}
-	out<<endl;
-	}
 	out<<endl<<endl;
 
 
@@ -614,7 +610,7 @@ double pumpCostFunction(int i)					//powerEl in kW
 
 
 
-double pipeCostFunction(int i, int j)					//diameter in m, lenght in m
+double pipeCostFunction(int i,int j)					//diameter in m, lenght in m
 {
 
 	return (result.outsideDiameterChart[i][j] * result.outsideDiameterChart[i][j] * 16458 - result.outsideDiameterChart[i][j] * 2109 + 151) * pipe.length[j];
