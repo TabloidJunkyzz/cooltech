@@ -25,6 +25,9 @@ double lambdaTemp;
 double newton;
 double newtonHelp;
 
+//Bool Variable mistake
+bool mistake;
+
 double pipeCostStorage;
 int degree;
 
@@ -299,7 +302,7 @@ cout << "--- PressureLossFriction ---"<<endl<<endl;
 	}
 
 
-cout << "############# Lambda von Nikuradse " << lambdaStart << " #############" <<endl<<endl;
+cout << "############# Lambda von Nikuradse: " << lambdaStart << " #############" <<endl<<endl;
 
 cout << "--- Calculated Diameter ---"<<endl<<endl;
 	for(int i=0; i<NPUMP;i++)
@@ -372,6 +375,11 @@ void userInformation()
 	cout << "Vielen dank dass sie die Dienste von Cooltech Technologies in Anspruch nehmen!"<<endl<<endl;
 	cout << "Die Daten aus den Tabellen werden eingelesen und verarbeitet ..."<<endl<<endl;
 	cout << "Bitte öffnen sie Cooltech_Daten.txt um die Ergebnisse der Berechnungen einzusehen."<<endl<<endl;
+
+	if(mistake == true)
+        {
+            cout << "DIE SCH*$!* VERKACKTE PUMPE 1 GEHT NICHT :( !"<<endl<<endl;
+        }
 
 }//END OF VOID userInformation
 
@@ -507,10 +515,16 @@ By Lina Lepp
 By Lukas Samuel Jeck
 #endif // 0
 //Declaration of our "output"-function that takes calculated data and writes it in Cooltech_Daten.txt
-void output(){
+void output()
+{
 
 	//Setting up output(Creating file operator)
 out.open("Cooltech_Daten.txt");
+
+if(mistake == true)
+    {
+     out << "DIE SCH*!$* VERKACKTE PUMPE 1 GEHT NICHT :( !"<<endl<<endl;
+    }
 
 	//Information (Headline of "Cooltech_Daten.txt")
 	out << "Gruppe 1.5 Numerik Praktikum" << "            --- Ausgeben der Dateien in eine Textdatei ---";
@@ -521,13 +535,13 @@ out.open("Cooltech_Daten.txt");
 
 
 	//Putting out ideal Diameters of pipes for each Pipe
-	out << "--- Durchmesser[Pumpe][Rohr] ---"<<endl<<endl;
+	out << "--- Innendurchmesser Bestellung[Pumpe][Rohr] ---"<<endl<<endl;
 	for(int i=0;i<NPUMP;i++)
 	{
 
 		for(int j=0;j<NPIPE;j++)
 		{
-      			out << "Durchmesser[" << i+1 << "]" << "[" << j+1 << "] " << setw(6) << left << result.insideDiameterChart[i][j] << "    ";
+      			out << "Innendurchmesser[" << i+1 << "]" << "[" << j+1 << "] " << setw(6) << left << result.insideDiameterChart[i][j] << "    ";
 		}
 			out<<endl;
 	}
@@ -561,15 +575,10 @@ out.open("Cooltech_Daten.txt");
 	out<<endl<<endl;
 
 
-	out << "--- Kosten Rohre[Pumpe][Rohr] ---"<<endl<<endl;
+	out << "--- Kosten Strom[Pumpe] ---"<<endl<<endl;
 	for(int i=0;i<NPUMP;i++)
 	{
-
-		for(int j=0;j<NPIPE;j++)
-		{
-      			out << "Rohrkosten[" << i+1 << "]" << "[" << j+1 << "] " << result.pipeCost[i][j] <<"    ";
-		}
-	out<<endl;
+		out << "Kosten Strom[" << i+1 << "] " << result.pumpCost[i]<<endl;
 	}
 	out<<endl<<endl;
 
@@ -594,6 +603,17 @@ out.open("Cooltech_Daten.txt");
 out.close();
 } //END of Void output
 
+
+
+
+void checkForMistake(int i,int j)
+{
+    if(result.pressureLossFriction[i][j]<0)
+        {
+            mistake = true;
+        }
+} //END OF VOID checkForMistake
+
 #if 0
 By Lukas Samuel Jeck
 #endif // 0
@@ -614,7 +634,7 @@ double pumpCostFunction(int i)					//powerEl in kW
 
 
 
-double pipeCostFunction(int i, int j)					//diameter in m, lenght in m
+double pipeCostFunction(int i,int j)					//diameter in m, lenght in m
 {
 
 	return (result.outsideDiameterChart[i][j] * result.outsideDiameterChart[i][j] * 16458 - result.outsideDiameterChart[i][j] * 2109 + 151) * pipe.length[j];
@@ -729,7 +749,6 @@ void polynomialFit()	                    //add cin>> degree for user												
         coefficents[k] = coefficents[k] / normalMatrix[k][k];           				//now finally divide the rhs by the coefficient of the variable to be calculated
     }
 }
-
 
 #if 0
 By Jakob

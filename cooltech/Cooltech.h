@@ -4,14 +4,14 @@
 #ifndef COOLTECH_H
 #define COOLTECH_H
 
-#include <fstream>
-#include <functional>
-#include <iostream>
-#include <string>
-#include <math.h>
-#include <iomanip>
-//#define NDEBUG
-#include <cassert>
+#include <fstream>    //Ifstream and Ofstream to Read and Output Data in .txt
+#include <functional> //Function pointers for general Newton function
+#include <iostream>   //
+#include <string>     //To Create strings
+#include <math.h>     //pow(), fabs(), sqrt() --> Trivial Mathematical functions
+#include <iomanip>    //For setw() To make the console and .txt look nice
+//#define NDEBUG      //Ignores assertions !But not if commented!
+#include <cassert>    //Assertions
 #define M_PI   3.14159265358979323846
 
 
@@ -20,8 +20,7 @@ const int NPIPE = 6;
 const int NPUMP = 9;
 const int NCOST = 8;
 const double EPSILON = 1e-6;
-const double TOTALFLOW = 0.432; //[m³/s]
-
+const double TOTALFLOW = 0.432; //[in m^3/s]
 
 
 //Creates a struct for all of our Variables
@@ -79,7 +78,7 @@ extern double lambda;
 extern double lambdaStart;
 extern double lambdaTemp;
 
-//Inwiefern brauch man das noch ??
+//Newton Variables
 extern double newton;
 extern double newtonHelp;
 
@@ -97,6 +96,9 @@ extern data pump;
 extern data cost;
 extern data result;
 
+//Mistake bool Variable
+extern bool mistake;
+
 //Function Prototypes!
 
 //READ
@@ -105,13 +107,15 @@ void printRead();
 void printResults();
 void output();
 
+//Mistake
+void checkForMistake(int i,int j);
+
 //PIPE MEASUREMENTS
 double pressureLossFrictionFunction (int i,int j);
 double nikuradse(double k);
 double diameterFunction (int i,int j);
 double reynoldsFunction (int i,int j);
 double pressureLossValveFunction(int i,int j);
-
 
 //NEWTON
 double colebrookFunction (int i, int j, double lambda);
