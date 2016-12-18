@@ -25,8 +25,8 @@ double lambdaTemp;
 double newton;
 double newtonHelp;
 
-//Bool Variable mistake
-bool mistake;
+double pipeCostStorage;
+int degree;
 
 //Struct variables
 data pipe, water, pump, cost, result;
@@ -299,7 +299,7 @@ cout << "--- PressureLossFriction ---"<<endl<<endl;
 	}
 
 
-cout << "############# Lambda von Nikuradse: " << lambdaStart << " #############" <<endl<<endl;
+cout << "############# Lambda von Nikuradse " << lambdaStart << " #############" <<endl<<endl;
 
 cout << "--- Calculated Diameter ---"<<endl<<endl;
 	for(int i=0; i<NPUMP;i++)
@@ -373,11 +373,6 @@ void userInformation()
 	cout << "Die Daten aus den Tabellen werden eingelesen und verarbeitet ..."<<endl<<endl;
 	cout << "Bitte öffnen sie Cooltech_Daten.txt um die Ergebnisse der Berechnungen einzusehen."<<endl<<endl;
 
-	if(mistake == true)
-        {
-            cout << "DIE SCH*$!* VERKACKTE PUMPE 1 GEHT NICHT :( !"<<endl<<endl;
-        }
-
 }//END OF VOID userInformation
 
 #if 0
@@ -387,7 +382,7 @@ By Lukas Samuel Jeck
 // ##################################################### Calculations for Pipedimensioning ################################
 
 #if 0
-By Hermann Hegel & Boda Yang [Lukas Samuel Jeck as a Helping Hand]
+By Hermann Gegel & Boda Yang [Lukas Samuel Jeck as a Helping Hand]
 #endif // 0
 double pressureLossFrictionFunction (int i,int j)//Calculates pressureLossFriction 1DIM [Initialisation of an array in main]
 {
@@ -488,7 +483,7 @@ void pickDiameterFromChart () //insideDiameter from chart out of read data, idea
     }
 }//END OF VOID pickDiameterFromChart
 #if 0
-By Hermann Hegel & Boda Yang [Lukas Samuel Jeck as a Helping Hand]
+By Hermann Gegel & Boda Yang [Lukas Samuel Jeck as a Helping Hand]
 #endif // 0
 
 
@@ -512,16 +507,10 @@ By Lina Lepp
 By Lukas Samuel Jeck
 #endif // 0
 //Declaration of our "output"-function that takes calculated data and writes it in Cooltech_Daten.txt
-void output()
-{
+void output(){
 
 	//Setting up output(Creating file operator)
 out.open("Cooltech_Daten.txt");
-
-if(mistake == true)
-    {
-     out << "DIE SCH*!$* VERKACKTE PUMPE 1 GEHT NICHT :( !"<<endl<<endl;
-    }
 
 	//Information (Headline of "Cooltech_Daten.txt")
 	out << "Gruppe 1.5 Numerik Praktikum" << "            --- Ausgeben der Dateien in eine Textdatei ---";
@@ -532,13 +521,13 @@ if(mistake == true)
 
 
 	//Putting out ideal Diameters of pipes for each Pipe
-	out << "--- Innendurchmesser Bestellung[Pumpe][Rohr] ---"<<endl<<endl;
+	out << "--- Durchmesser[Pumpe][Rohr] ---"<<endl<<endl;
 	for(int i=0;i<NPUMP;i++)
 	{
 
 		for(int j=0;j<NPIPE;j++)
 		{
-      			out << "Innendurchmesser[" << i+1 << "]" << "[" << j+1 << "] " << setw(6) << left << result.insideDiameterChart[i][j] << "    ";
+      			out << "Durchmesser[" << i+1 << "]" << "[" << j+1 << "] " << setw(6) << left << result.insideDiameterChart[i][j] << "    ";
 		}
 			out<<endl;
 	}
@@ -573,11 +562,15 @@ if(mistake == true)
 
 
 	out << "--- Kosten Rohre[Pumpe][Rohr] ---"<<endl<<endl;
+	for(int i=0;i<NPUMP;i++)
+	{
 
 		for(int j=0;j<NPIPE;j++)
 		{
-      			out << "Rohrkosten[" << j+1 << "] " << result.pipeCost[j] <<"    ";
+      			out << "Rohrkosten[" << i+1 << "]" << "[" << j+1 << "] " << result.pipeCost[i][j] <<"    ";
 		}
+	out<<endl;
+	}
 	out<<endl<<endl;
 
 
@@ -589,31 +582,17 @@ if(mistake == true)
 	out<<endl<<endl;
 
 
-	out << "--- Gesamtkosten[Pumpe][Rohr] ---"<<endl<<endl;
+	out << "--- Gesamtkosten[Pumpe] ---"<<endl<<endl;
 	for(int i=0;i<NPUMP;i++)
 	{
 
-		for(int j=0;j<NPIPE;j++)
-		{
-      			out << "Gesamtkosten[" << i+1 << "]" << "[" << j+1 << "] " << setw(6) << left << result.totalCost[i][j] <<"\t";
-		}
-	out<<endl;
+ 		out << "Gesamtkosten[" << i+1 << "]" << setw(6) << left << result.totalCost[i] <<"\t";
+        out<<endl;
 	}
 	out<<endl<<endl;
 
 out.close();
 } //END of Void output
-
-
-
-
-void checkForMistake(int i,int j)
-{
-    if(result.pressureLossFriction[i][j]<0)
-        {
-            mistake = true;
-        }
-} //END OF VOID checkForMistake
 
 #if 0
 By Lukas Samuel Jeck
@@ -635,7 +614,7 @@ double pumpCostFunction(int i)					//powerEl in kW
 
 
 
-double pipeCostFunction(int i,int j)					//diameter in m, lenght in m
+double pipeCostFunction(int i, int j)					//diameter in m, lenght in m
 {
 
 	return (result.outsideDiameterChart[i][j] * result.outsideDiameterChart[i][j] * 16458 - result.outsideDiameterChart[i][j] * 2109 + 151) * pipe.length[j];
@@ -655,10 +634,14 @@ double powerCostFunction(int i)						//powerEl in kW, time in h
 
 
 
-double totalCostFunction(int i,int j)
+double totalCostFunction(int i)
 {
-
-	return pumpCostFunction(i) + pipeCostFunction(i,j) + powerCostFunction(i);
+    pipeCostStorage = 0;
+    for (int j = 0; j < NPIPE; j++)
+    {
+        pipeCostStorage += pipeCostFunction(i,j);
+    }
+	return pumpCostFunction(i) + pipeCostStorage + powerCostFunction(i);
 
 }
 #if 0
@@ -670,85 +653,83 @@ By Jakob
 #endif // 0
 //########################################################### Polynomial Fit ##########################################
 
-double* polynomialFit(int degree, int NPUMP, double* x, double* y)	//add cin>> degree for user
-														//degree is the degree of the polynom, x[] and y[] the valuepairs
-{
+void polynomialFit()	                    //add cin>> degree for user														//degree is the degree of the polynom, x[] and y[] the valuepairs
+{                                                       // ATTENTION: ADD ASSERT FOR DEGREE > NPUMP ---> ABORT
 
-
-    int i, j, k;										//counting Variables
-    double a[degree + 1];								//Array that stores the coefficents of the polynom
-    double X[2 * degree + 1];							//Array that will store the values of sigma(xi),sigma(xi^2),sigma(xi^3)....sigma(xi^2n)
-    for (i = 0 ; i < 2 * degree + 1 ; i++)
+    int i, k, l, m;										//counting Variables
+    double* coefficents = new double[degree+1];								//Array that stores the coefficents of the polynom
+    double powerElArray[2 * degree + 1];							//Array that will store the values of sigma(xi),sigma(xi^2),sigma(xi^3)....sigma(xi^2n)
+    for (k = 0 ; k < 2 * degree + 1 ; k++)
     {
-        X[i]=0;
-        for (j = 0 ; j < NPUMP ; j++)
+        powerElArray[k]=0;
+        for (i = 0 ; i < NPUMP ; i++)
         {
-			X[i] = X[i] + pow(x[j],i);
+			powerElArray[i] = powerElArray[i] + pow(pump.powerEL[i],k);
 		}
     }
-    double B[degree + 1][degree + 2];					//B is the Normal matrix that will store the equations
-    for (i = 0 ; i <= degree ; i++)
+    double normalMatrix[degree + 1][degree + 2];					//B is the Normal matrix that will store the equations
+    for (k = 0 ; k <= degree ; k++)
     {
-        for (j = 0 ; j <= degree ; j++)
+        for (l = 0 ; l <= degree ; l++)
         {
-            B[i][j] = X[i + j];
+            normalMatrix[k][l] = powerElArray[k + l];
         }
     }													//Build the Normal matrix by storing the corresponding coefficients at the right positions except the last column of the matrix
-    double Y[degree + 1];                    			//Array to store the values of sigma(yi),sigma(xi*yi),sigma(xi^2*yi)...sigma(xi^n*yi)
-    for (i = 0 ; i < degree + 1 ; i++)
+    double resultArray[degree + 1];                    			//Array to store the values of sigma(yi),sigma(xi*yi),sigma(xi^2*yi)...sigma(xi^n*yi)
+    for (k = 0 ; k < degree + 1 ; k++)
     {
-        Y[i] = 0;
-        for (j = 0 ; j < NPUMP ; j++)
+        resultArray[i] = 0;
+        for (i = 0 ; i < NPUMP ; i++)
         {
-			Y[i] = Y[i] + pow(x[j],i) * y[j];
+			resultArray[k] = resultArray[k] + pow(pump.powerEL[i],k) * result.totalCost[i];
 		}
     }
-    for (i = 0 ; i <= degree ; i++)
+    for (k = 0 ; k <= degree ; k++)
     {
-        B[i][degree+1] = Y[i];
+        normalMatrix[k][degree+1] = resultArray[k];
     }               									//load the values of Y as the last column of B
 
 
-    for (i = 0 ; i < degree + 1 ; i++)                 	//From now Gaussian Elimination starts to solve the set of linear equations (Pivotisation)
+    for (l = 0 ; l < degree + 1 ; l++)                 	//From now Gaussian Elimination starts to solve the set of linear equations (Pivotisation)
      {
         for (k = i + 1 ; k < degree + 1 ; k++)
         {
-            if (B[i][i] < B[k][i])
+            if (normalMatrix[l][l] < normalMatrix[k][l])
             {
-                for (j = 0 ; j <= degree + 1 ; j++)
+                for (m = 0 ; m <= degree + 1 ; m++)
                 {
-                    double temp = B[i][j];
-                    B[i][j] = B[k][j];
-                    B[k][j] = temp;
+                    double temp = normalMatrix[l][m];
+                    normalMatrix[l][m] = normalMatrix[k][m];
+                    normalMatrix[k][m] = temp;
                 }
 			}
 		}
 	}
-    for (i = 0 ; i < degree ; i++)
+    for (l = 0 ; l < degree ; l++)
     {         											//loop to perform the gauss elimination
         for (k = i + 1 ; k < degree + 1 ; k++)
             {
-                double t = B[k][i] / B[i][i];
-                for (j = 0 ; j <= degree + 1 ; j++)
+                double t = normalMatrix[k][l] / normalMatrix[l][l];
+                for (m = 0 ; m <= degree + 1 ; m++)
                 {
-                    B[k][j] = B[k][j] - t * B[i][j];    //make the elements below the pivot elements
+                    normalMatrix[k][m] = normalMatrix[k][m] - t * normalMatrix[l][m];    //make the elements below the pivot elements
 				}
             }
     }
-    for (i = degree ; i >= 0 ; i--)               		//back-substitution
+    for (k = degree ; k >= 0 ; k--)               		//back-substitution
     {
-        a[i] = B[i][degree + 1];                		//make the variable to be calculated equal to the rhs of the last equation
-        for (j = 0 ; j < degree + 1 ; j++)
+        coefficents[k] = normalMatrix[k][degree + 1];                		//make the variable to be calculated equal to the rhs of the last equation
+        for (l = 0 ; l < degree + 1 ; l++)
         {
-            if (j != i)
+            if (l != k)
             {            								//then subtract all the lhs values except the coefficient of the variable whose value is being calculated
-                a[i] = a[i] - B[i][j] * a[j];
+                coefficents[k] = coefficents[k] - normalMatrix[k][l] * coefficents[l];
 			}
 		}
-        a[i] = a[i] / B[i][i];           				//now finally divide the rhs by the coefficient of the variable to be calculated
+        coefficents[k] = coefficents[k] / normalMatrix[k][k];           				//now finally divide the rhs by the coefficient of the variable to be calculated
     }
-    return a;
 }
+
 
 #if 0
 By Jakob

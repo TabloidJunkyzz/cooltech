@@ -13,20 +13,24 @@ int main(){
 cout << "############# Wollen sie die Entwicklerversion starten?? #############"<<endl<< "Ja[j], Nein[n]" <<endl;
 getline(cin,version);
 
-//Puts Data in System
-read();
-//Prints Data in console
+if(version == "n")
+{
+    userInformation();
+}
+	//Puts Data in System
+	read();
+	//Prints Data in console
 
 if(version == "j")
-    {
-        printRead();
-    }
+{
+	printRead();
+}
+	//Here we have a for-loop to save data in arrays with [NPUMP]
+	for(int i=0;i<NPUMP;i++)
+	{
+		result.pumpCost[i] = pumpCostFunction(i);
+	}
 
-//for loop for saving pumpCost
-for(int i=0;i<NPUMP;i++)
-    {
-      result.pumpCost[i] = pumpCostFunction(i);
-    }
 
 	//Here happens most of the stuff: 1.) Calculating our needed datas  2.) Saving those in arrays with [NPUMP][NPIPE]
 	for (int i=0;i<NPUMP;i++)
@@ -47,24 +51,27 @@ for(int i=0;i<NPUMP;i++)
 				} while (fabs(lambdaTemp - lambda) > 0.0001);
 
 			result.pressureLossValve[i][j] = pressureLossValveFunction(i,j);
-			result.pipeCost[j]             = pipeCostFunction(i,j);
-			result.totalCost[i][j]         = totalCostFunction(i,j);
-			checkForMistake(i,j);
+			result.pipeCost[i][j] 		   = pipeCostFunction(i,j);
+			result.totalCost[i]            = totalCostFunction(i);
 
 		}
 	}
 
-	if(version == "n")
-    {
-        userInformation();
-    }
-
 	pickDiameterFromChart(); //Saved in "result.insideDiameterChart[i][j]" & "result.outsideDiameterChart[i][j]"
 
-if (version == "j")
-{
-	printResults();
-}
+    if (version == "j")
+    {
+        printResults();
+    }
 	output();
+
+
+	cout << "Please enter degree of the polynom (has to be smaller than the amount of pumps): " << endl;
+	cin >> degree;
+	assert(degree < NPUMP);
+
+
+    polynomialFit();
+
 
 } //INT MAIN END

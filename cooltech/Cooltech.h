@@ -4,14 +4,14 @@
 #ifndef COOLTECH_H
 #define COOLTECH_H
 
-#include <fstream>    //Ifstream and Ofstream to Read and Output Data in .txt
-#include <functional> //Function pointers for general Newton function
-#include <iostream>   //
-#include <string>     //To Create strings
-#include <math.h>     //pow(), fabs(), sqrt() --> Trivial Mathematical functions
-#include <iomanip>    //For setw() To make the console and .txt look nice
-//#define NDEBUG      //Ignores assertions !But not if commented!
-#include <cassert>    //Assertions
+#include <fstream>
+#include <functional>
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <iomanip>
+//#define NDEBUG
+#include <cassert>
 #define M_PI   3.14159265358979323846
 
 
@@ -20,7 +20,8 @@ const int NPIPE = 6;
 const int NPUMP = 9;
 const int NCOST = 8;
 const double EPSILON = 1e-6;
-const double TOTALFLOW = 0.432; //[in m^3/s]
+const double TOTALFLOW = 0.432; //[m³/s]
+
 
 
 //Creates a struct for all of our Variables
@@ -55,9 +56,9 @@ struct data{
 	double outsideDiameterChart[NPUMP][NPIPE];
 	double pressureLossValve[NPUMP][NPIPE];
 	double pumpCost[NPUMP];
-	double pipeCost[NPIPE];
-	double powerCost[NCOST];
-	double totalCost[NPUMP][NPIPE];
+	double pipeCost[NPUMP][NPIPE];
+	double powerCost[NPUMP];
+	double totalCost[NPUMP];
 
 
 };
@@ -78,9 +79,16 @@ extern double lambda;
 extern double lambdaStart;
 extern double lambdaTemp;
 
-//Newton Variables
+//Inwiefern brauch man das noch ??
 extern double newton;
 extern double newtonHelp;
+
+//temporarily stores Pipe costs for each Pump
+extern double pipeCostStorage;
+
+//declarations for polynomfit
+extern int degree;
+extern double* coefficents;
 
 //Struct Data declarations!
 extern data pipe;
@@ -88,9 +96,6 @@ extern data water;
 extern data pump;
 extern data cost;
 extern data result;
-
-//Mistake bool Variable
-extern bool mistake;
 
 //Function Prototypes!
 
@@ -100,15 +105,13 @@ void printRead();
 void printResults();
 void output();
 
-//Mistake
-void checkForMistake(int i,int j);
-
 //PIPE MEASUREMENTS
 double pressureLossFrictionFunction (int i,int j);
 double nikuradse(double k);
 double diameterFunction (int i,int j);
 double reynoldsFunction (int i,int j);
 double pressureLossValveFunction(int i,int j);
+
 
 //NEWTON
 double colebrookFunction (int i, int j, double lambda);
@@ -126,7 +129,8 @@ void userInformation();
 double pipeCostFunction(int i,int j);
 double pumpCostFunction(int i);
 double powerCostFunction(int i);
-double totalCostFunction(int i,int j);
+double totalCostFunction(int i);
 
+void polynomialFit();
 
 #endif //Header Guard END
