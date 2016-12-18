@@ -4,10 +4,6 @@
 using namespace std;
 
 
-#if 0
-+Kostenfunktion aufrufen fehlt noch
-#endif
-
 int main(){
 
 cout << "############# Wollen sie die Entwicklerversion starten?? #############"<<endl<< "Ja[j], Nein[n]" <<endl;
@@ -45,12 +41,24 @@ for(int i=0;i<NPUMP;i++)
 					lambda = newtonFunction(i,j, lambda, colebrookFunction) ;//Functioncalling of newton
 
 				} while (fabs(lambdaTemp - lambda) > 0.0001);
+                checkForMistake(i, j);
 
-			result.pressureLossValve[i][j] = pressureLossValveFunction(i,j);
-			result.pipeCost[j]             = pipeCostFunction(i,j);
-			result.totalCost[i][j]         = totalCostFunction(i,j);
-			checkForMistake(i,j);
+		}
 
+	}
+
+	pickDiameterFromChart(); //Saved in "result.insideDiameterChart[i][j]" & "result.outsideDiameterChart[i][j]"
+
+
+
+    for (int i=0;i<NPUMP;i++)
+	{
+	    result.totalCost[i]            = totalCostFunction(i);
+
+		for(int j=0;j<NPIPE;j++)
+		{
+            result.pipeCost[i][j] 		   = pipeCostFunction(i,j);
+            result.pressureLossValve[i][j] = pressureLossValveFunction(i,j);
 		}
 	}
 
@@ -59,12 +67,11 @@ for(int i=0;i<NPUMP;i++)
         userInformation();
     }
 
-	pickDiameterFromChart(); //Saved in "result.insideDiameterChart[i][j]" & "result.outsideDiameterChart[i][j]"
 
-if (version == "j")
-{
-	printResults();
-}
+    if (version == "j")
+    {
+        printResults();
+    }
 	output();
 
 
