@@ -5,9 +5,14 @@
 #define COOLTECH_H
 
 #include <fstream>
+#include <functional>
 #include <iostream>
 #include <string>
-#include <functional>
+#include <math.h>
+#include <iomanip>
+//#define NDEBUG
+#include <cassert>
+#define M_PI   3.14159265358979323846
 
 
 //constants for length of arrays and Epsilon !
@@ -50,7 +55,7 @@ struct data{
 	double outsideDiameterChart[NPUMP][NPIPE];
 	double pressureLossValve[NPUMP][NPIPE];
 	double pumpCost[NPUMP];
-	double pipeCost[NPIPE];
+	double pipeCost[NPUMP][NPIPE];
 	double powerCost[NCOST];
 	double totalCost[NPUMP][NPIPE];
 
@@ -65,11 +70,15 @@ extern std::string skip;
 extern std::ofstream out;
 extern double temp;
 
+//String for Versions
+extern std::string  version;
+
 //Extern Variables for Header of functions in pipe measurements and main
 extern double lambda;
 extern double lambdaStart;
 extern double lambdaTemp;
 
+//Inwiefern brauch man das noch ??
 extern double newton;
 extern double newtonHelp;
 
@@ -104,7 +113,7 @@ double newtonFunction (int i, int j, double lambda, std::function<double(int,int
 //Chart Diameter
 void pickDiameterFromChart ();
 
-//Information for user
+//Information for user  --> Still needs to be written
 void userInformation();
 
 //Costfunctions
