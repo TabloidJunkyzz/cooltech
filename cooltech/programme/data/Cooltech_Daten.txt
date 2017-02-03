@@ -1,0 +1,96 @@
+
+Group 1.5 Numerical Project            --- Writing results into a .txt File ---
+
+
+~~~ Data of Pipecalculations ~~~
+
+
+--- Ideal InsideDiameter[Pump][Pipe] ---
+
+Pump 1 is not working with the given data
+InsideDiameter[2][1] 0.3004 [m]    InsideDiameter[2][2] 0.2018 [m]    InsideDiameter[2][3] 0.1478 [m]    InsideDiameter[2][4] 0.2018 [m]    InsideDiameter[2][5] 0.2018 [m]    InsideDiameter[2][6] 0.2494 [m]    
+InsideDiameter[3][1] 0.2494 [m]    InsideDiameter[3][2] 0.2018 [m]    InsideDiameter[3][3] 0.123  [m]    InsideDiameter[3][4] 0.2018 [m]    InsideDiameter[3][5] 0.2018 [m]    InsideDiameter[3][6] 0.2018 [m]    
+InsideDiameter[4][1] 0.2494 [m]    InsideDiameter[4][2] 0.1478 [m]    InsideDiameter[4][3] 0.123  [m]    InsideDiameter[4][4] 0.2018 [m]    InsideDiameter[4][5] 0.1478 [m]    InsideDiameter[4][6] 0.2018 [m]    
+InsideDiameter[5][1] 0.2018 [m]    InsideDiameter[5][2] 0.1478 [m]    InsideDiameter[5][3] 0.123  [m]    InsideDiameter[5][4] 0.1478 [m]    InsideDiameter[5][5] 0.1478 [m]    InsideDiameter[5][6] 0.2018 [m]    
+InsideDiameter[6][1] 0.2018 [m]    InsideDiameter[6][2] 0.1478 [m]    InsideDiameter[6][3] 0.123  [m]    InsideDiameter[6][4] 0.1478 [m]    InsideDiameter[6][5] 0.1478 [m]    InsideDiameter[6][6] 0.2018 [m]    
+InsideDiameter[7][1] 0.2018 [m]    InsideDiameter[7][2] 0.123  [m]    InsideDiameter[7][3] 0.123  [m]    InsideDiameter[7][4] 0.1478 [m]    InsideDiameter[7][5] 0.1478 [m]    InsideDiameter[7][6] 0.2018 [m]    
+InsideDiameter[8][1] 0.2018 [m]    InsideDiameter[8][2] 0.123  [m]    InsideDiameter[8][3] 0.099  [m]    InsideDiameter[8][4] 0.1478 [m]    InsideDiameter[8][5] 0.1478 [m]    InsideDiameter[8][6] 0.1478 [m]    
+InsideDiameter[9][1] 0.2018 [m]    InsideDiameter[9][2] 0.123  [m]    InsideDiameter[9][3] 0.099  [m]    InsideDiameter[9][4] 0.1478 [m]    InsideDiameter[9][5] 0.123  [m]    InsideDiameter[9][6] 0.1478 [m]    
+
+
+--- Pressureloss Valve[Pump][Pipe] ---
+
+Pump 1 is not working with the given data
+Valve Pressureloss[2][1] 5139.17 [Pa]    Valve Pressureloss[2][2] 9625.81 [Pa]    Valve Pressureloss[2][3] 13018.9 [Pa]    Valve Pressureloss[2][4] 10621   [Pa]    Valve Pressureloss[2][5] 7413.33 [Pa]    Valve Pressureloss[2][6] 349.584 [Pa]    
+Valve Pressureloss[3][1] 8282.76 [Pa]    Valve Pressureloss[3][2] 20892.4 [Pa]    Valve Pressureloss[3][3] 7359.92 [Pa]    Valve Pressureloss[3][4] 22105.9 [Pa]    Valve Pressureloss[3][5] 18854.8 [Pa]    Valve Pressureloss[3][6] 3090.32 [Pa]    
+Valve Pressureloss[4][1] 20652.4 [Pa]    Valve Pressureloss[4][2] 10754.5 [Pa]    Valve Pressureloss[4][3] 17656.3 [Pa]    Valve Pressureloss[4][4] 33373.6 [Pa]    Valve Pressureloss[4][5] 3590.57 [Pa]    Valve Pressureloss[4][6] 14891.4 [Pa]    
+Valve Pressureloss[5][1] 3058.45 [Pa]    Valve Pressureloss[5][2] 21586.1 [Pa]    Valve Pressureloss[5][3] 27820.6 [Pa]    Valve Pressureloss[5][4] 6460.35 [Pa]    Valve Pressureloss[5][5] 14575   [Pa]    Valve Pressureloss[5][6] 26442.6 [Pa]    
+Valve Pressureloss[6][1] 15058.3 [Pa]    Valve Pressureloss[6][2] 32284.3 [Pa]    Valve Pressureloss[6][3] 37879   [Pa]    Valve Pressureloss[6][4] 17449.1 [Pa]    Valve Pressureloss[6][5] 25421.6 [Pa]    Valve Pressureloss[6][6] 37820.5 [Pa]    
+Valve Pressureloss[7][1] 26934.9 [Pa]    Valve Pressureloss[7][2] 2547.05 [Pa]    Valve Pressureloss[7][3] 47849.1 [Pa]    Valve Pressureloss[7][4] 28337.4 [Pa]    Valve Pressureloss[7][5] 36157.4 [Pa]    Valve Pressureloss[7][6] 49065.6 [Pa]    
+Valve Pressureloss[8][1] 38709.8 [Pa]    Valve Pressureloss[8][2] 13047.6 [Pa]    Valve Pressureloss[8][3] 5110.99 [Pa]    Valve Pressureloss[8][4] 39140.6 [Pa]    Valve Pressureloss[8][5] 46801   [Pa]    Valve Pressureloss[8][6] 5619.34 [Pa]    
+Valve Pressureloss[9][1] 50398   [Pa]    Valve Pressureloss[9][2] 23471   [Pa]    Valve Pressureloss[9][3] 14939.1 [Pa]    Valve Pressureloss[9][4] 49869.9 [Pa]    Valve Pressureloss[9][5] 6955.65 [Pa]    Valve Pressureloss[9][6] 16666.2 [Pa]    
+
+
+~~~ Data of Costcalculations ~~~
+
+
+--- Cost Pipes[Pump][Pipe] ---
+
+Pump 1 is not working with the given data
+Cost Pipe[2][1] 68678.2 [€]    Cost Pipe[2][2] 11583   [€]    Cost Pipe[2][3] 9269.75 [€]    Cost Pipe[2][4] 16216.2 [€]    Cost Pipe[2][5] 9266.41 [€]    Cost Pipe[2][6] 22835.1 [€]    
+Cost Pipe[3][1] 45670.3 [€]    Cost Pipe[3][2] 11583   [€]    Cost Pipe[3][3] 6465.14 [€]    Cost Pipe[3][4] 16216.2 [€]    Cost Pipe[3][5] 9266.41 [€]    Cost Pipe[3][6] 13899.6 [€]    
+Cost Pipe[4][1] 45670.3 [€]    Cost Pipe[4][2] 5793.59 [€]    Cost Pipe[4][3] 6465.14 [€]    Cost Pipe[4][4] 16216.2 [€]    Cost Pipe[4][5] 4634.87 [€]    Cost Pipe[4][6] 13899.6 [€]    
+Cost Pipe[5][1] 27799.2 [€]    Cost Pipe[5][2] 5793.59 [€]    Cost Pipe[5][3] 6465.14 [€]    Cost Pipe[5][4] 8111.03 [€]    Cost Pipe[5][5] 4634.87 [€]    Cost Pipe[5][6] 13899.6 [€]    
+Cost Pipe[6][1] 27799.2 [€]    Cost Pipe[6][2] 5793.59 [€]    Cost Pipe[6][3] 6465.14 [€]    Cost Pipe[6][4] 8111.03 [€]    Cost Pipe[6][5] 4634.87 [€]    Cost Pipe[6][6] 13899.6 [€]    
+Cost Pipe[7][1] 27799.2 [€]    Cost Pipe[7][2] 4040.71 [€]    Cost Pipe[7][3] 6465.14 [€]    Cost Pipe[7][4] 8111.03 [€]    Cost Pipe[7][5] 4634.87 [€]    Cost Pipe[7][6] 13899.6 [€]    
+Cost Pipe[8][1] 27799.2 [€]    Cost Pipe[8][2] 4040.71 [€]    Cost Pipe[8][3] 4607.76 [€]    Cost Pipe[8][4] 8111.03 [€]    Cost Pipe[8][5] 4634.87 [€]    Cost Pipe[8][6] 6952.31 [€]    
+Cost Pipe[9][1] 27799.2 [€]    Cost Pipe[9][2] 4040.71 [€]    Cost Pipe[9][3] 4607.76 [€]    Cost Pipe[9][4] 8111.03 [€]    Cost Pipe[9][5] 3232.57 [€]    Cost Pipe[9][6] 6952.31 [€]    
+
+
+--- Cost Pumps[Pump] ---
+
+Pump 1 is not working with the given data
+Cost Pump[2] 25947.3 [€]
+Cost Pump[3] 27873.4 [€]
+Cost Pump[4] 29533.7 [€]
+Cost Pump[5] 30975.1 [€]
+Cost Pump[6] 32234   [€]
+Cost Pump[7] 33339.3 [€]
+Cost Pump[8] 35476.1 [€]
+Cost Pump[9] 37613   [€]
+
+
+--- Cost Power[Pump] ---
+
+Pump 1 is not working with the given data
+Cost Power[2] 34285.7 [€]
+Cost Power[3] 42666.7 [€]
+Cost Power[4] 50000   [€]
+Cost Power[5] 56470.6 [€]
+Cost Power[6] 62222.2 [€]
+Cost Power[7] 67368.4 [€]
+Cost Power[8] 75789.5 [€]
+Cost Power[9] 84210.5 [€]
+
+
+--- Total Costs[Pumpe] ---
+
+Pump 1 is not working with the given data
+Total Cost[2] 198082 [€]
+Total Cost[3] 173641 [€]
+Total Cost[4] 172213 [€]
+Total Cost[5] 154149 [€]
+Total Cost[6] 161160 [€]
+Total Cost[7] 165658 [€]
+Total Cost[8] 167412 [€]
+Total Cost[9] 176567 [€]
+
+
+--- Coefficients of our Polynom ---
+
+Coefficient 1: -191845   Coefficient 2: 35368.2   Coefficient 3: -1071.96   Coefficient 4: 10.1696   
+
+--- Minimum Calculation ---
+
+Least Cost: 141278[€] In regard to Pumppower: 16[kW]
+
